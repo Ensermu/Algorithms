@@ -1,22 +1,11 @@
-def peak(A):
-   if len(A) == 1:
-       return A[0]
-   if len(A) == 2:
-        if A[0] >= A[1]:
-            return A[0]
-        else:
-            return A[1]
-   else:
-    if A[int(len(A)/2)] >= A[int(len(A)/2)+1] and A[int(len(A)/2)] >= A[int(len(A)/2)-1]:
-        return A[int(len(A)/2)]
-    elif A[int(len(A)/2)] < A[int(len(A)/2)-1]:
-        if len(A) == 3:
-            return peak(A[0:int(len(A)/2)+1])
-        else:
-            return peak(A[0:int(len(A)/2)])
+def peak(A, s, e):
+    mid = (s+e)//2
+    if s == e:
+        return A[s]
     else:
-        if len(A) == 3:
-            return peak(A[int(len(A)/2):len(A)])
-        else:   
-            return peak(A[int(len(A)/2)+1:len(A)])
-
+        if A[mid-1] > A[mid]:
+            return peak(A, s, mid-1)
+        elif A[mid+1] > A[mid]:
+            return peak(A, mid+1, e)
+        else:
+            return A[mid]
